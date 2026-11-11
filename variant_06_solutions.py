@@ -17,8 +17,8 @@ def select_nav_source(gps_avail: bool, gps_acc: float, ins_calib: bool) -> str:
         selected_nav_source = "INS"
     else:
         selected_nav_source = "Star Tracker"
-    
-    print(f'Обране джерело навігаційних даних:{selected_nav_source}')
+    print("Результат задачі №1")
+    print(f'Обране джерело навігаційних даних: {selected_nav_source}')
     return selected_nav_source
 
 #Можливий приклад даних для перевірки коду
@@ -31,7 +31,18 @@ def check_temp_zone(zone_data: list) -> str:
     - zone_name == "ENGINE" та середнє(t1,t2,t3) > 100 -> "Перегрів двигуна"
     - будь-яка інша зона -> "Зона {zone_name} в нормі"
     """
-    ...
+    match zone_data:
+        case ["ENGINE",[t1, t2, t3]] if (t1+t2+t3) / 3 > 100:
+            return "Перегрів двигуна"
+        case [zone_name, _ ]:
+            return f"Зона {zone_name} в нормі"
+        case _:
+            return f"Помилка y форматі даних"     
+#Приклади вхідних даних для перевірки
+print("Результат задачі №2")
+print(check_temp_zone(zone_data = ["ENGINE", [95, 125, 100]]))
+# print(check_temp_zone(zone_data = ["NOT_ENGINE", [70, 100, 100]]))
+
 
 # Задача 3: Пошук подолання швидкості звуку (for / break)
 def find_supersonic_second(speeds: list) -> int | None:
