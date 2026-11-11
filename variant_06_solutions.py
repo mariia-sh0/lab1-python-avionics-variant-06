@@ -50,11 +50,28 @@ def find_supersonic_second(speeds: list) -> int | None:
     За допомогою циклу for знаходить першу секунду (індекс), коли швидкість > 340 м/с,
     і перериває цикл за допомогою break.
     """
-    ...
+    default_second = None
+    for index, value in enumerate(speeds):
+        if value > 340:
+            default_second = index         #Якщо знайдеться така швидкість, яка задовільнить умову, базове значення зміннюється на новознайдене
+            print("Результат задачі №3")
+            print(f"Швидкість стала більшою за 340 м/c на {default_second} секудні")
+            break
+    return default_second
+        
+find_supersonic_second(speeds = [100, 200, 350, 400])
+
 
 # Задача 4: Зменшення частоти дискретизації (range)
 def downsample_telemetry(data: list) -> list:
     """
     За допомогою range з кроком 3 відбирає кожен 3-й елемент списку data.
     """
-    ...
+    chousen_frequencies = []
+    for i in range(0, len(data), 3):
+            chousen_frequencies.append(data[i])
+    return chousen_frequencies
+data = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+result=downsample_telemetry(data)
+print("Результат задачі №4:")
+print(f"Відібрані елементи: {result}")
